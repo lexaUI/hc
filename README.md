@@ -13,7 +13,7 @@ To copy this repository to your PC follow these steps:
 
 * assets || *this folder contains assets like fonts, images and so on*
 * src || *this is where actions happens*
-..* components || *this folder contains reusable parts of code*
-..*..* UI || *this folder contains components which are only responsible for drawing the interface*
-..* screens || *this folder contains screens*
-..* theme.js || *this file stores constans responsible for interface color*
+* components || *this folder contains reusable parts of code*
+* UI || *this folder contains components which are only responsible for drawing the interface*
+* screens || *this folder contains screens*
+* theme.js || *this file stores constans responsible for interface color*
