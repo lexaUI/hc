@@ -30,13 +30,9 @@ export default function App() {
 		);
 	}
 
-	return (
-		<View style={styles.container}>
-			{/* <HelloScreen /> */}
-			{/* <SignUpScreen /> */}
-			<LoginScreen />
-		</View>
-	);
+	let content = <HelloScreen />;
+
+	return <View style={styles.container}>{content}</View>;
 }
 
 const styles = StyleSheet.create({

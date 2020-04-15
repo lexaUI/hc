@@ -1,13 +1,21 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableNativeFeedback } from "react-native";
 import { THEME } from "../../theme";
 import { BoldText } from "./BoldText";
 
-export const LoginButton = ({ children, color = THEME.LOGIN_BTN_COLOR }) => {
+export const LoginButton = ({
+	children,
+	color = THEME.LOGIN_BTN_COLOR,
+	onPress,
+}) => {
 	return (
-		<View>
-			<Text style={{ ...styles.button, color: color }}>{children}</Text>
-		</View>
+		<TouchableNativeFeedback activeOpacity={0.8} onPress={onPress}>
+			<View>
+				<Text onPress={onPress} style={{ ...styles.button, color: color }}>
+					{children}
+				</Text>
+			</View>
+		</TouchableNativeFeedback>
 	);
 };
 
