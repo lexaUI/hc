@@ -3,6 +3,7 @@ import { ScrollView, StyleSheet } from "react-native";
 import { LoginInput } from "../components/LoginInput";
 import { LoginButton } from "../components/UI/LoginButton";
 import { Header } from "../components/UI/Header";
+import { THEME } from "../theme";
 
 export const SignUpScreen = () => {
 	const [fields, setFields] = useState([
@@ -30,6 +31,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: "center",
 		alignItems: "center",
+		backgroundColor: THEME.LOGIN_BACKGROUND,
 	},
 	header: {
 		marginBottom: 30,

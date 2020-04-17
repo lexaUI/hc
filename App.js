@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import * as Font from "expo-font";
-
-import { StyleSheet, Text, View } from "react-native";
-import { LoginScreen } from "./src/screens/LoginScreen";
-import { HelloScreen } from "./src/screens/HelloScreen";
-import { SignUpScreen } from "./src/screens/SignUpScreen";
+import { StyleSheet, View } from "react-native";
 import { AppLoading } from "expo";
 import { THEME } from "./src/theme";
+import { AppNavigation } from "./src/navigation/AppNavigation";
 
 async function loadApplication() {
 	await Font.loadAsync({
@@ -30,14 +27,5 @@ export default function App() {
 		);
 	}
 
-	let content = <SignUpScreen />;
-
-	return <View style={styles.container}>{content}</View>;
+	return <AppNavigation />;
 }
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: THEME.LOGIN_BACKGROUND,
-	},
-});

@@ -6,12 +6,18 @@ import { LoginButton } from "../components/UI/LoginButton";
 import { Header } from "../components/UI/Header";
 import { SocialButton } from "../components/UI/SocialButton";
 
-export const HelloScreen = ({ onChangePage }) => {
+export const HelloScreen = ({ navigation }) => {
+	const goToSignUp = () => {
+		navigation.navigate("SignUp");
+	};
+	const goToLogIn = () => {
+		navigation.navigate("LogIn");
+	};
 	return (
 		<View style={styles.login}>
 			<Header>Are you new here?</Header>
-			<LoginButton>Sing Up</LoginButton>
-			<LoginButton>Log In</LoginButton>
+			<LoginButton onPress={goToSignUp}>Sing Up</LoginButton>
+			<LoginButton onPress={goToLogIn}>Log In</LoginButton>
 			<View style={styles.socialButtons}>
 				<SocialButton>
 					<Entypo name="facebook" size={25} />
