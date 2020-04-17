@@ -16,7 +16,7 @@ export const SignUpScreen = () => {
 
 	return (
 		<ScrollView contentContainerStyle={styles.container}>
-			<Header style={styles.header}>Fill in fields to Sign Up</Header>
+			<Header style={styles.header}>Fill in the fields to Sign Up</Header>
 			{fields.map((field, index) => {
 				return <LoginInput title={field} key={index} />;
 			})}

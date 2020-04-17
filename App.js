@@ -30,7 +30,7 @@ export default function App() {
 		);
 	}
 
-	let content = <HelloScreen />;
+	let content = <SignUpScreen />;
 
 	return <View style={styles.container}>{content}</View>;
 }
