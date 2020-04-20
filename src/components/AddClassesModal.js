@@ -4,9 +4,18 @@ import { BoldText } from "./UI/BoldText";
 import { ModalButton } from "./UI/ModalButton";
 
 export const AddClassesModal = ({ visible, addNewClass }) => {
-	const [info, setInfo] = useState({ time: "", title: "", name: "" });
+	const [time, setTime] = useState("01:30 PM");
+	const [title, setTitle] = useState("React Native");
+	const [name, setName] = useState("Jack Uait");
 
-	const handleClick = () => {};
+	const handleClick = () => {
+		const info = {
+			time,
+			title,
+			name,
+		};
+		addNewClass(info);
+	};
 
 	return (
 		<Modal animationType="slide" visible={visible} transparent={true}>
@@ -19,30 +28,26 @@ export const AddClassesModal = ({ visible, addNewClass }) => {
 						style={styles.input}
 						maxLength={64}
 						placeholder="Time of the class"
-						value={info.time}
-						onChange={(time) => setInfo((info.time = time))}
+						value={time}
+						onChange={(time) => setTime(time)}
 					/>
 					<TextInput
 						style={styles.input}
 						maxLength={30}
 						placeholder="Name of the class"
-						value={info.title}
-						onChange={(title) => setInfo((info.title = title))}
+						value={title}
+						onChange={(title) => setTitle(title)}
 					/>
 					<TextInput
 						style={styles.input}
 						maxLength={30}
 						placeholder="Teacher's name"
-						value={info.name}
-						onChange={(name) => setInfo((info.name = name))}
-					/>
-					<Button
-						title="check"
-						onPress={(info) => console.log(info.name, info.title, info.time)}
+						value={name}
+						onChange={(name) => setName(name)}
 					/>
 					<ModalButton
 						style={{ marginTop: 20 }}
-						onPress={() => addNewClass("test")}
+						onPress={() => handleClick()}
 					/>
 				</View>
 			</View>

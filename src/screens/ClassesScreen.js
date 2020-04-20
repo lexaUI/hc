@@ -17,8 +17,7 @@ export const ClassesScreen = () => {
 	const [modalVisible, setModalVisbile] = useState(false);
 
 	const addNewClass = (info) => {
-		// setClasses([...classes, info]);
-		console.log(info);
+		setClasses([...classes, info]);
 		setModalVisbile(false);
 	};
 
