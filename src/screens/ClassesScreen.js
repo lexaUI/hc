@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { ScrollView, View, StyleSheet } from "react-native";
 import { BoldText } from "../components/UI/BoldText";
-import { RegularText } from "../components/UI/RegularText";
 import { LightText } from "../components/UI/LightText";
 import { ClassItem } from "../components/ClassItem";
 import { RoundButton } from "../components/UI/RoundButton";
 import { AddClassesModal } from "../components/AddClassesModal";
-import { Button } from "react-native-paper";
+import { DayPicker } from "../components/DayPicker";
 
 export const ClassesScreen = () => {
 	const [classes, setClasses] = useState([
@@ -39,7 +38,8 @@ export const ClassesScreen = () => {
 				<View style={styles.header}>
 					<BoldText style={styles.headerTitle}>Classes</BoldText>
 					<LightText style={styles.counter}>
-						You have {classes.length} classes today
+						You have {classes.length}{" "}
+						{classes.length === 1 ? "class" : "classes"} on <DayPicker />
 					</LightText>
 				</View>
 				<View style={styles.classes}>{content}</View>
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
 		fontSize: 40,
 	},
 	counter: {
-		fontSize: 20,
+		fontSize: 18,
 		paddingTop: 10,
 	},
 	classes: {

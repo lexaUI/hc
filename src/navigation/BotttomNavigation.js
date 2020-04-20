@@ -12,6 +12,7 @@ export const BottomNavigation = () => {
 			activeColor="#4043c9"
 			inactiveColor="#3e2465"
 			barStyle={{ backgroundColor: "#fdfdfd", elevation: 15 }}
+			initialRouteName="Classes"
 		>
 			<Tab.Screen
 				name="Hello"
