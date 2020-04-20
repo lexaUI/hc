@@ -8,41 +8,78 @@ import { AddClassesModal } from "../components/AddClassesModal";
 import { DayPicker } from "../components/DayPicker";
 
 export const ClassesScreen = () => {
-	const [classes, setClasses] = useState([
-		{ time: "7:30 AM", title: "Programming", name: "Ms. Andrews" },
-		{ time: "9:45 AM", title: "Ballet", name: "Dr. Chase" },
-		{ time: "11:20 AM", title: "Advanced Yoga", name: "Mr. Sawyer" },
-	]);
+	const [classes, setClasses] = useState({
+		Monday: [
+			{ time: "7:30 AM", title: "Programming", name: "Ms. Andrews" },
+			{ time: "9:45 AM", title: "Ballet", name: "Dr. Chase" },
+			{ time: "11:20 AM", title: "Advanced Yoga", name: "Mr. Sawyer" },
+		],
+		Tuesday: [
+			{ time: "7:30 AM", title: "Programming", name: "Ms. Andrews" },
+			{ time: "9:45 AM", title: "Ballet", name: "Dr. Chase" },
+			{ time: "11:20 AM", title: "Advanced Yoga", name: "Mr. Sawyer" },
+		],
+		Wednesday: [
+			{ time: "7:30 AM", title: "Programming", name: "Ms. Andrews" },
+			{ time: "9:45 AM", title: "Ballet", name: "Dr. Chase" },
+			{ time: "11:20 AM", title: "Advanced Yoga", name: "Mr. Sawyer" },
+		],
+		Thursday: [
+			{ time: "7:30 AM", title: "Programming", name: "Ms. Andrews" },
+			{ time: "9:45 AM", title: "Ballet", name: "Dr. Chase" },
+		],
+		Friday: [
+			{ time: "7:30 AM", title: "Programming", name: "Ms. Andrews" },
+			{ time: "9:45 AM", title: "Ballet", name: "Dr. Chase" },
+			{ time: "11:20 AM", title: "Advanced Yoga", name: "Mr. Sawyer" },
+		],
+		Saturday: [
+			{ time: "7:30 AM", title: "Programming", name: "Ms. Andrews" },
+			{ time: "9:45 AM", title: "Ballet", name: "Dr. Chase" },
+			{ time: "11:20 AM", title: "Advanced Yoga", name: "Mr. Sawyer" },
+		],
+		Sunday: [
+			{ time: "7:30 AM", title: "Programming", name: "Ms. Andrews" },
+			{ time: "9:45 AM", title: "Ballet", name: "Dr. Chase" },
+			{ time: "11:20 AM", title: "Advanced Yoga", name: "Mr. Sawyer" },
+		],
+	});
 	const [modalVisible, setModalVisbile] = useState(false);
 
 	const addNewClass = (info) => {
 		setClasses([...classes, info]);
+		handleDayChange();
 		setModalVisbile(false);
 	};
 
-	const content = classes.map((item, index) => {
-		return (
-			<ClassItem
-				key={index}
-				time={item.time}
-				title={item.title}
-				name={item.name}
-				active={index + 1}
-				total={classes.length}
-			/>
-		);
-	});
+	const handleDayChange = () => {
+		const content = classes.Thursday.map((item, index) => {
+			return (
+				<ClassItem
+					key={index}
+					time={item.time}
+					title={item.title}
+					name={item.name}
+					active={index + 1}
+					total={classes.Thursday.length}
+				/>
+			);
+		});
+		return content;
+	};
+
 	return (
 		<View style={{ flex: 1 }}>
 			<ScrollView style={styles.wrapper}>
 				<View style={styles.header}>
 					<BoldText style={styles.headerTitle}>Classes</BoldText>
 					<LightText style={styles.counter}>
-						You have {classes.length}{" "}
-						{classes.length === 1 ? "class" : "classes"} on <DayPicker />
+						You have {classes.Thursday.length}{" "}
+						{classes.Thursday.length === 1 ? "class" : "classes"} on{" "}
+						<DayPicker />
 					</LightText>
 				</View>
-				<View style={styles.classes}>{content}</View>
+				<View style={styles.classes}>{handleDayChange()}</View>
 				<AddClassesModal visible={modalVisible} addNewClass={addNewClass} />
 			</ScrollView>
 			<RoundButton

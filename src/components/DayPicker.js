@@ -15,11 +15,16 @@ export const DayPicker = ({ dayArr }) => {
 	];
 	const curDay = days[new Date().getDay() - 1];
 
+	const changeHandler = (itemValue) => {
+		console.log(itemValue);
+		setSelectedValue(itemValue);
+	};
+
 	return (
 		<View style={styles.container}>
 			<Picker
 				selectedValue={selectedValue}
-				onValueChange={(itemValue) => setSelectedValue(itemValue)}
+				onValueChange={changeHandler}
 				mode="dropdown"
 				style={{
 					height: 30,
@@ -32,7 +37,7 @@ export const DayPicker = ({ dayArr }) => {
 						<Picker.Item
 							key={index}
 							label={curDay === day ? "Today" : day}
-							value={curDay === day ? "Today" : day}
+							value={curDay === day ? day : day}
 							name={day}
 						/>
 					);
