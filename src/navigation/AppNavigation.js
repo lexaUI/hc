@@ -1,18 +1,11 @@
-import { createAppContainer } from "react-navigation";
-import { createStackNavigator } from "react-navigation-stack";
-import { HelloScreen } from "../screens/HelloScreen";
-import { LoginScreen } from "../screens/LoginScreen";
-import { SignUpScreen } from "../screens/SignUpScreen";
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { BottomNavigation } from "./BotttomNavigation";
 
-const Navigator = createStackNavigator(
-	{
-		Hello: HelloScreen,
-		LogIn: LoginScreen,
-		SignUp: SignUpScreen,
-	},
-	{
-		initialRouteName: "Hello",
-	},
-);
-
-export const AppNavigation = createAppContainer(Navigator);
+export const AppNavigation = () => {
+	return (
+		<NavigationContainer>
+			<BottomNavigation />
+		</NavigationContainer>
+	);
+};

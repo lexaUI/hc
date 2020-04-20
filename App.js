@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import * as Font from "expo-font";
-import { StyleSheet, View } from "react-native";
 import { AppLoading } from "expo";
-import { THEME } from "./src/theme";
 import { AppNavigation } from "./src/navigation/AppNavigation";
 
 async function loadApplication() {
