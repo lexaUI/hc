@@ -5,10 +5,11 @@ import {
 	Platform,
 	TouchableNativeFeedback,
 } from "react-native";
-import { Feather } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { LightText } from "./LightText";
+import { Entypo } from "@expo/vector-icons";
 
-export const RoundButton = ({ style, onPress }) => {
+export const ModalButton = ({ title, style, onPress }) => {
 	const Wrapper =
 		Platform.OS === "android" ? TouchableNativeFeedback : TouchableOpacity;
 	return (
@@ -18,7 +19,7 @@ export const RoundButton = ({ style, onPress }) => {
 				activeOpacity={0.8}
 				onPress={onPress}
 			>
-				<Feather name="plus" style={styles.title} />
+				<Entypo name="add-to-list" style={styles.title} />
 			</Wrapper>
 		</View>
 	);
@@ -26,16 +27,16 @@ export const RoundButton = ({ style, onPress }) => {
 
 const styles = StyleSheet.create({
 	button: {
-		width: 70,
-		height: 70,
-		backgroundColor: "red",
+		width: 100,
+		height: 50,
+		backgroundColor: "#4043c9",
 		alignItems: "center",
 		justifyContent: "center",
-		borderRadius: 45,
+		borderRadius: 10,
 		elevation: 5,
 	},
 	title: {
-		fontSize: 45,
+		fontSize: 35,
 		color: "#fff",
 	},
 });

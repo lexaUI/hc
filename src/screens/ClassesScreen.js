@@ -9,30 +9,48 @@ import { AddClassesModal } from "../components/AddClassesModal";
 import { Button } from "react-native-paper";
 
 export const ClassesScreen = () => {
-	const [counter, setCounter] = useState(3);
+	const [classes, setClasses] = useState([
+		{ time: "7:30 AM", title: "Programming", name: "Ms. Andrews" },
+		{ time: "9:45 AM", title: "Ballet", name: "Dr. Chase" },
+		{ time: "11:20 AM", title: "Advanced Yoga", name: "Mr. Sawyer" },
+	]);
 	const [modalVisible, setModalVisbile] = useState(false);
+
+	const addNewClass = (info) => {
+		// setClasses([...classes, info]);
+		console.log(info);
+		setModalVisbile(false);
+	};
+
+	const content = classes.map((item, index) => {
+		return (
+			<ClassItem
+				key={index}
+				time={item.time}
+				title={item.title}
+				name={item.name}
+				active={index + 1}
+				total={classes.length}
+			/>
+		);
+	});
 	return (
-		<ScrollView style={styles.wrapper}>
+		<View style={{ flex: 1 }}>
+			<ScrollView style={styles.wrapper}>
+				<View style={styles.header}>
+					<BoldText style={styles.headerTitle}>Classes</BoldText>
+					<LightText style={styles.counter}>
+						You have {classes.length} classes today
+					</LightText>
+				</View>
+				<View style={styles.classes}>{content}</View>
+				<AddClassesModal visible={modalVisible} addNewClass={addNewClass} />
+			</ScrollView>
 			<RoundButton
-				onPress={() => console.log("true")}
+				onPress={() => setModalVisbile(true)}
 				style={styles.roundButton}
 			/>
-			<View style={styles.header}>
-				<BoldText style={styles.headerTitle}>Classes</BoldText>
-				<LightText style={styles.counter}>
-					You have {counter} classes today
-				</LightText>
-			</View>
-			<View style={styles.classes}>
-				<ClassItem />
-				<ClassItem />
-				<ClassItem />
-			</View>
-			<AddClassesModal
-				visible={modalVisible}
-				closeModal={() => setModalVisbile(false)}
-			/>
-		</ScrollView>
+		</View>
 	);
 };
 
@@ -56,6 +74,8 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 	},
 	roundButton: {
-		left: 5,
+		position: "absolute",
+		bottom: 10,
+		right: 10,
 	},
 });

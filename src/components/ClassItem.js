@@ -5,16 +5,18 @@ import { BoldText } from "./UI/BoldText";
 import { RegularText } from "./UI/RegularText";
 import { LightText } from "./UI/LightText";
 
-export const ClassItem = () => {
+export const ClassItem = ({ time, title, name, active, total }) => {
 	return (
 		<View style={styles.card}>
 			<MaterialIcons style={styles.icon} name="class" />
 
 			<View>
-				<BoldText style={styles.time}>7:30 AM</BoldText>
-				<RegularText style={styles.title}>Product designer meeting</RegularText>
-				<RegularText style={styles.name}>John Karmack</RegularText>
-				<LightText style={styles.number}>1 of 3</LightText>
+				<BoldText style={styles.time}>{time}</BoldText>
+				<RegularText style={styles.title}>{title}</RegularText>
+				<RegularText style={styles.name}>{name}</RegularText>
+				<LightText style={styles.number}>
+					{active} of {total}
+				</LightText>
 			</View>
 		</View>
 	);

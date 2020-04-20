@@ -11,7 +11,7 @@ export const BottomNavigation = () => {
 		<Tab.Navigator
 			activeColor="#4043c9"
 			inactiveColor="#3e2465"
-			barStyle={{ backgroundColor: "#fdfdfd", elevation: 5 }}
+			barStyle={{ backgroundColor: "#fdfdfd", elevation: 15 }}
 		>
 			<Tab.Screen
 				name="Hello"
