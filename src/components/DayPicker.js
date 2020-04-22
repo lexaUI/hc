@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { View, StyleSheet, Picker } from "react-native";
 
-export const DayPicker = ({ dayArr }) => {
-	const [selectedValue, setSelectedValue] = useState("Today");
-
+export const DayPicker = ({ onChange }) => {
 	const days = [
 		"Monday",
 		"Tuesday",
@@ -13,10 +11,11 @@ export const DayPicker = ({ dayArr }) => {
 		"Saturday",
 		"Sunday",
 	];
-	const curDay = days[new Date().getDay() - 1];
+	const curDay = new Date().getDay() - 1;
+	const [selectedValue, setSelectedValue] = useState(curDay);
 
 	const changeHandler = (itemValue) => {
-		console.log(itemValue);
+		onChange(itemValue);
 		setSelectedValue(itemValue);
 	};
 
@@ -33,14 +32,7 @@ export const DayPicker = ({ dayArr }) => {
 				}}
 			>
 				{days.map((day, index) => {
-					return (
-						<Picker.Item
-							key={index}
-							label={curDay === day ? "Today" : day}
-							value={curDay === day ? day : day}
-							name={day}
-						/>
-					);
+					return <Picker.Item key={index} label={day} value={index} />;
 				})}
 			</Picker>
 		</View>

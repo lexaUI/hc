@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { Modal, View, StyleSheet, TextInput, Button } from "react-native";
+import { Modal, View, StyleSheet, TextInput } from "react-native";
 import { BoldText } from "./UI/BoldText";
 import { ModalButton } from "./UI/ModalButton";
 
 export const AddClassesModal = ({ visible, addNewClass }) => {
-	const [time, setTime] = useState("01:30 PM");
-	const [title, setTitle] = useState("React Native");
-	const [name, setName] = useState("Jack Uait");
+	const [time, setTime] = useState("");
+	const [title, setTitle] = useState("");
+	const [name, setName] = useState("");
 
 	const handleClick = () => {
 		const info = {
@@ -71,14 +71,5 @@ const styles = StyleSheet.create({
 		borderRadius: 5,
 		paddingTop: 10,
 		paddingBottom: 10,
-	},
-	input: {
-		fontSize: 16,
-		borderWidth: 1,
-		width: 200,
-		marginBottom: 10,
-		borderRightColor: "transparent",
-		borderLeftColor: "transparent",
-		borderTopColor: "transparent",
 	},
 });

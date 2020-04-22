@@ -1,71 +1,61 @@
-import React, { useState } from "react";
-import { ScrollView, View, StyleSheet } from "react-native";
+import React, { useState, useEffect } from "react";
+import { ScrollView, View, StyleSheet, Button, Alert } from "react-native";
 import { BoldText } from "../components/UI/BoldText";
 import { LightText } from "../components/UI/LightText";
 import { ClassItem } from "../components/ClassItem";
-import { RoundButton } from "../components/UI/RoundButton";
-import { AddClassesModal } from "../components/AddClassesModal";
 import { DayPicker } from "../components/DayPicker";
 
 export const ClassesScreen = () => {
-	const [classes, setClasses] = useState({
-		Monday: [
-			{ time: "7:30 AM", title: "Programming", name: "Ms. Andrews" },
-			{ time: "9:45 AM", title: "Ballet", name: "Dr. Chase" },
-			{ time: "11:20 AM", title: "Advanced Yoga", name: "Mr. Sawyer" },
-		],
-		Tuesday: [
-			{ time: "7:30 AM", title: "Programming", name: "Ms. Andrews" },
-			{ time: "9:45 AM", title: "Ballet", name: "Dr. Chase" },
-			{ time: "11:20 AM", title: "Advanced Yoga", name: "Mr. Sawyer" },
-		],
-		Wednesday: [
-			{ time: "7:30 AM", title: "Programming", name: "Ms. Andrews" },
-			{ time: "9:45 AM", title: "Ballet", name: "Dr. Chase" },
-			{ time: "11:20 AM", title: "Advanced Yoga", name: "Mr. Sawyer" },
-		],
-		Thursday: [
-			{ time: "7:30 AM", title: "Programming", name: "Ms. Andrews" },
-			{ time: "9:45 AM", title: "Ballet", name: "Dr. Chase" },
-		],
-		Friday: [
-			{ time: "7:30 AM", title: "Programming", name: "Ms. Andrews" },
-			{ time: "9:45 AM", title: "Ballet", name: "Dr. Chase" },
-			{ time: "11:20 AM", title: "Advanced Yoga", name: "Mr. Sawyer" },
-		],
-		Saturday: [
-			{ time: "7:30 AM", title: "Programming", name: "Ms. Andrews" },
-			{ time: "9:45 AM", title: "Ballet", name: "Dr. Chase" },
-			{ time: "11:20 AM", title: "Advanced Yoga", name: "Mr. Sawyer" },
-		],
-		Sunday: [
-			{ time: "7:30 AM", title: "Programming", name: "Ms. Andrews" },
-			{ time: "9:45 AM", title: "Ballet", name: "Dr. Chase" },
-			{ time: "11:20 AM", title: "Advanced Yoga", name: "Mr. Sawyer" },
-		],
-	});
-	const [modalVisible, setModalVisbile] = useState(false);
+	// const [Monday, setMonday] = useState([
+	// 	{ time: "7:30 AM", title: "Programming", name: "Ms. Andrews" },
+	// ]);
+	// const [Tuesday, setTuesday] = useState([
+	// 	{ time: "9:45 AM", title: "Ballet", name: "Dr. Chase" },
+	// ]);
+	const [Wednesday, setWednesday] = useState([
+		{ time: "9:45 AM", title: "Training", name: "Dr. Chase" },
+		{ time: "11:20 AM", title: "Advanced Yoga", name: "Mr. Sawyer" },
+	]);
+	// const [Thursday, setThursday] = useState([
+	// 	{ time: "9:45 AM", title: "Ballet", name: "Dr. Chase" },
+	// 	{ time: "7:30 AM", title: "Programming", name: "Ms. Andrews" },
+	// 	{ time: "11:20 AM", title: "Advanced Yoga", name: "Mr. Sawyer" },
+	// ]);
+	// const [Friday, setFriday] = useState([
+	// 	{ time: "7:30 AM", title: "Programming", name: "Ms. Andrews" },
+	// 	{ time: "11:20 AM", title: "Advanced Yoga", name: "Mr. Sawyer" },
+	// ]);
+	// const [Saturday, setSaturday] = useState([]);
+	// const [Sunday, setSunday] = useState([
+	// 	{ time: "7:30 AM", title: "Programming", name: "Ms. Andrews" },
+	// ]);
 
-	const addNewClass = (info) => {
-		setClasses([...classes, info]);
-		handleDayChange();
-		setModalVisbile(false);
-	};
+	// const days = [Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday];
+	const days = [
+		"Monday",
+		"Tuesday",
+		"Wednesday",
+		"Thursday",
+		"Friday",
+		"Saturday",
+		"Sunday",
+	];
+	const [curDayName, setCurDayName] = useState(days[new Date().getDay() - 1]);
 
-	const handleDayChange = () => {
-		const content = classes.Thursday.map((item, index) => {
-			return (
-				<ClassItem
-					key={index}
-					time={item.time}
-					title={item.title}
-					name={item.name}
-					active={index + 1}
-					total={classes.Thursday.length}
-				/>
-			);
+	const [classes, setClasses] = useState([]);
+
+	const addNewClass = (time, title, name) => {
+		setClasses((prev) => {
+			return [
+				...prev,
+				{
+					id: Date.now().toString(),
+					time,
+					title,
+					name,
+				},
+			];
 		});
-		return content;
 	};
 
 	return (
@@ -73,19 +63,31 @@ export const ClassesScreen = () => {
 			<ScrollView style={styles.wrapper}>
 				<View style={styles.header}>
 					<BoldText style={styles.headerTitle}>Classes</BoldText>
-					<LightText style={styles.counter}>
-						You have {classes.Thursday.length}{" "}
-						{classes.Thursday.length === 1 ? "class" : "classes"} on{" "}
-						<DayPicker />
+
+					<LightText style={styles.headerInfo}>Today is {curDayName}</LightText>
+					<LightText style={styles.headerInfo}>
+						You have {classes.length}{" "}
+						{classes.length === 1 ? "class" : "classes"} today{" "}
+						{/* <DayPicker onChange={(day) => handleChange(day)} /> */}
 					</LightText>
 				</View>
-				<View style={styles.classes}>{handleDayChange()}</View>
-				<AddClassesModal visible={modalVisible} addNewClass={addNewClass} />
+
+				<View style={styles.classes}>
+					{classes.map((item, index) => {
+						return (
+							<ClassItem
+								key={index}
+								time={item.time}
+								title={item.title}
+								name={item.name}
+								active={index + 1}
+								total={classes.length}
+							/>
+						);
+					})}
+					<ClassItem mode="add" onAdd={addNewClass} />
+				</View>
 			</ScrollView>
-			<RoundButton
-				onPress={() => setModalVisbile(true)}
-				style={styles.roundButton}
-			/>
 		</View>
 	);
 };
@@ -101,7 +103,7 @@ const styles = StyleSheet.create({
 	headerTitle: {
 		fontSize: 40,
 	},
-	counter: {
+	headerInfo: {
 		fontSize: 18,
 		paddingTop: 10,
 	},
