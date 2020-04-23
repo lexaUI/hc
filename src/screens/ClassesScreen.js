@@ -7,7 +7,7 @@ import { DayPicker } from "../components/DayPicker";
 import EStyleSheet from "react-native-extended-stylesheet";
 
 export const ClassesScreen = () => {
-	const daysClasses = [
+	const [daysClasses, setdaysClasses] = useState([
 		[
 			{
 				id: "1",
@@ -57,7 +57,7 @@ export const ClassesScreen = () => {
 			{ id: "2", time: "9:45 AM", title: "Ballet", name: "Dr. Chase" },
 			{ id: "3", time: "11:20 AM", title: "Advanced Yoga", name: "Mr. Sawyer" },
 		],
-	];
+	]);
 
 	const days = [
 		"Monday",

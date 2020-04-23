@@ -1,8 +1,13 @@
 import React from "react";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
-import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
+import {
+	MaterialCommunityIcons,
+	MaterialIcons,
+	Entypo,
+} from "@expo/vector-icons";
 import { HelloScreen } from "../screens/HelloScreen";
 import { ClassesScreen } from "../screens/ClassesScreen";
+import { MessagesScreen } from "../screens/MessagesScreen";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -31,6 +36,16 @@ export const BottomNavigation = () => {
 					tabBarLabel: "Classes",
 					tabBarIcon: ({ color }) => (
 						<MaterialIcons name="class" color={color} size={26} />
+					),
+				}}
+			/>
+			<Tab.Screen
+				name="Private Chats"
+				component={MessagesScreen}
+				options={{
+					tabBarLabel: "Private Chats",
+					tabBarIcon: ({ color }) => (
+						<Entypo name="chat" color={color} size={26} />
 					),
 				}}
 			/>
