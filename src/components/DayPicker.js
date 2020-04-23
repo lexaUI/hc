@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Picker } from "react-native";
+import { View, Picker, Dimensions } from "react-native";
+import EStyleSheet from "react-native-extended-stylesheet";
 
 export const DayPicker = ({ onChange }) => {
 	const days = [
@@ -11,13 +12,15 @@ export const DayPicker = ({ onChange }) => {
 		"Saturday",
 		"Sunday",
 	];
-	const curDay = new Date().getDay() - 1;
+	const curDay = days[new Date().getDay() - 1];
 	const [selectedValue, setSelectedValue] = useState(curDay);
 
-	const changeHandler = (itemValue) => {
-		onChange(itemValue);
+	const changeHandler = (itemValue, itemIndex) => {
+		onChange(itemIndex);
 		setSelectedValue(itemValue);
 	};
+
+	const { width, height } = Dimensions.get("window");
 
 	return (
 		<View style={styles.container}>
@@ -27,19 +30,19 @@ export const DayPicker = ({ onChange }) => {
 				mode="dropdown"
 				style={{
 					height: 30,
-					width: 130,
-					marginTop: 10,
+					width: width * 0.4,
+					marginTop: 9,
 				}}
 			>
 				{days.map((day, index) => {
-					return <Picker.Item key={index} label={day} value={index} />;
+					return <Picker.Item key={index} label={day} value={day} />;
 				})}
 			</Picker>
 		</View>
 	);
 };
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
 	container: {
 		width: 130,
 		height: 32,

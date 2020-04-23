@@ -1,36 +1,64 @@
 import React, { useState, useEffect } from "react";
-import { ScrollView, View, StyleSheet, Button, Alert } from "react-native";
+import { ScrollView, View, Button, Alert } from "react-native";
 import { BoldText } from "../components/UI/BoldText";
 import { LightText } from "../components/UI/LightText";
 import { ClassItem } from "../components/ClassItem";
 import { DayPicker } from "../components/DayPicker";
+import EStyleSheet from "react-native-extended-stylesheet";
 
 export const ClassesScreen = () => {
-	// const [Monday, setMonday] = useState([
-	// 	{ time: "7:30 AM", title: "Programming", name: "Ms. Andrews" },
-	// ]);
-	// const [Tuesday, setTuesday] = useState([
-	// 	{ time: "9:45 AM", title: "Ballet", name: "Dr. Chase" },
-	// ]);
-	const [Wednesday, setWednesday] = useState([
-		{ time: "9:45 AM", title: "Training", name: "Dr. Chase" },
-		{ time: "11:20 AM", title: "Advanced Yoga", name: "Mr. Sawyer" },
-	]);
-	// const [Thursday, setThursday] = useState([
-	// 	{ time: "9:45 AM", title: "Ballet", name: "Dr. Chase" },
-	// 	{ time: "7:30 AM", title: "Programming", name: "Ms. Andrews" },
-	// 	{ time: "11:20 AM", title: "Advanced Yoga", name: "Mr. Sawyer" },
-	// ]);
-	// const [Friday, setFriday] = useState([
-	// 	{ time: "7:30 AM", title: "Programming", name: "Ms. Andrews" },
-	// 	{ time: "11:20 AM", title: "Advanced Yoga", name: "Mr. Sawyer" },
-	// ]);
-	// const [Saturday, setSaturday] = useState([]);
-	// const [Sunday, setSunday] = useState([
-	// 	{ time: "7:30 AM", title: "Programming", name: "Ms. Andrews" },
-	// ]);
+	const daysClasses = [
+		[
+			{
+				id: "1",
+				time: "6:15 AM",
+				title: "Gaming",
+				name: "Ms Kalonice Connally",
+			},
+			{
+				id: "2",
+				time: "10:00 PM",
+				title: "Ballet",
+				name: "Mr Acacio Stringfellow",
+			},
+		],
+		[{ id: "1", time: "7:30 AM", title: "Programming", name: "Ms. Andrews" }],
+		[
+			{ id: "1", time: "8:00 AM", title: "Coding", name: "Ms Anne Inman" },
+			{
+				id: "2",
+				time: "9:45 AM",
+				title: "Higher Mathematics",
+				name: "Dr. Chase",
+			},
+			{ id: "3", time: "11:20 AM", title: "Advanced Yoga", name: "Mr. Sawyer" },
+		],
+		[
+			{ id: "1", time: "9:45 AM", title: "Ballet", name: "Dr. Chase" },
+			{ id: "2", time: "11:20 AM", title: "Advanced Yoga", name: "Mr. Sawyer" },
+		],
+		[
+			{ id: "1", time: "5:00 AM", title: "Economics", name: "Mr. Richards" },
+			{ id: "2", time: "7:30 AM", title: "Programming", name: "Ms. Andrews" },
+			{ id: "3", time: "9:45 AM", title: "Ballet", name: "Dr. Chase" },
+		],
+		[
+			{
+				id: "1",
+				time: "7:30 AM",
+				title: "Programming",
+				name: "Ms Chana Virden",
+			},
+			{ id: "2", time: "9:45 AM", title: "Ballet", name: "Dr. Chase" },
+			{ id: "3", time: "11:20 AM", title: "Advanced Yoga", name: "Mr. Sawyer" },
+		],
+		[
+			{ id: "1", time: "7:30 AM", title: "Programming", name: "Ms. Andrews" },
+			{ id: "2", time: "9:45 AM", title: "Ballet", name: "Dr. Chase" },
+			{ id: "3", time: "11:20 AM", title: "Advanced Yoga", name: "Mr. Sawyer" },
+		],
+	];
 
-	// const days = [Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday];
 	const days = [
 		"Monday",
 		"Tuesday",
@@ -40,9 +68,10 @@ export const ClassesScreen = () => {
 		"Saturday",
 		"Sunday",
 	];
-	const [curDayName, setCurDayName] = useState(days[new Date().getDay() - 1]);
+	const [curDay, setCurDay] = useState(new Date().getDay() - 1);
+	const [curDayName] = useState(days[new Date().getDay() - 1]);
 
-	const [classes, setClasses] = useState([]);
+	const [classes, setClasses] = useState(daysClasses[curDay]);
 
 	const addNewClass = (time, title, name) => {
 		setClasses((prev) => {
@@ -58,6 +87,11 @@ export const ClassesScreen = () => {
 		});
 	};
 
+	const changeDay = (day) => {
+		setCurDay(day);
+		setClasses(daysClasses[day]);
+	};
+
 	return (
 		<View style={{ flex: 1 }}>
 			<ScrollView style={styles.wrapper}>
@@ -67,8 +101,8 @@ export const ClassesScreen = () => {
 					<LightText style={styles.headerInfo}>Today is {curDayName}</LightText>
 					<LightText style={styles.headerInfo}>
 						You have {classes.length}{" "}
-						{classes.length === 1 ? "class" : "classes"} today{" "}
-						{/* <DayPicker onChange={(day) => handleChange(day)} /> */}
+						{classes.length === 1 ? "class" : "classes"} on{" "}
+						<DayPicker onChange={changeDay} />
 					</LightText>
 				</View>
 
@@ -92,7 +126,7 @@ export const ClassesScreen = () => {
 	);
 };
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
 	wrapper: {
 		flex: 1,
 		backgroundColor: "#f9f9f7",
@@ -101,19 +135,14 @@ const styles = StyleSheet.create({
 		padding: 20,
 	},
 	headerTitle: {
-		fontSize: 40,
+		fontSize: "2.6rem",
 	},
 	headerInfo: {
-		fontSize: 18,
+		fontSize: "1.2rem",
 		paddingTop: 10,
 	},
 	classes: {
 		justifyContent: "center",
 		alignItems: "center",
-	},
-	roundButton: {
-		position: "absolute",
-		bottom: 10,
-		right: 10,
 	},
 });

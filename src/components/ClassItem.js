@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { View, StyleSheet, TextInput } from "react-native";
+import { View, TextInput, Dimensions } from "react-native";
+import EStyleSheet from "react-native-extended-stylesheet";
 import { MaterialIcons, AntDesign } from "@expo/vector-icons";
 import { BoldText } from "./UI/BoldText";
 import { RegularText } from "./UI/RegularText";
@@ -15,9 +16,9 @@ export const ClassItem = ({
 	mode,
 	onAdd,
 }) => {
-	const [classTime, setClassTime] = useState("1:30 PM");
-	const [classTitle, setClassTitle] = useState("Advanced React Native");
-	const [teacherName, setTeacherName] = useState("Alexa Bachurski");
+	const [classTime, setClassTime] = useState("");
+	const [classTitle, setClassTitle] = useState("");
+	const [teacherName, setTeacherName] = useState("");
 	const [check, setCheck] = useState(false);
 
 	const handleClick = () => {
@@ -54,6 +55,7 @@ export const ClassItem = ({
 							onChangeText={(value) => setClassTime(value)}
 						/>
 						<TextInput
+							autoCapitalize="words"
 							autoCorrect={true}
 							style={styles.input}
 							maxLength={30}
@@ -93,34 +95,39 @@ export const ClassItem = ({
 	);
 };
 
-const styles = StyleSheet.create({
+const { width, height } = Dimensions.get("window");
+
+const styles = EStyleSheet.create({
 	card: {
 		flexDirection: "row",
 		alignItems: "center",
-		width: 315,
-		height: 140,
+		width: width * 0.9,
+		height: height * 0.2,
 		backgroundColor: "#fdfdfd",
 		padding: 10,
-		marginBottom: 20,
+		marginBottom: "1rem",
+		marginTop: "1rem",
 	},
 	icon: {
-		fontSize: 70,
-		marginBottom: 15,
+		fontSize: "6rem",
 		marginRight: 10,
 		color: "#4043c9",
 	},
 	time: {
 		color: "#a9afbc",
-		fontSize: 22,
+		fontSize: "1.5rem",
 		marginBottom: 5,
 	},
 	title: {
-		fontSize: 16,
+		fontSize: "1rem",
 		marginBottom: 5,
 	},
 	name: {
-		fontSize: 16,
+		fontSize: "1rem",
 		marginBottom: 5,
+	},
+	number: {
+		fontSize: "1rem",
 	},
 	touchable: {
 		shadowColor: "rgba(0,0,0, .4)", // IOS
@@ -133,16 +140,13 @@ const styles = StyleSheet.create({
 		borderRadius: 5,
 	},
 	input: {
-		fontSize: 16,
+		fontSize: "1rem",
 		borderWidth: 1,
-		width: 200,
-		marginBottom: 10,
+		width: width * 0.5,
+		marginBottom: "0.6rem",
 		borderRightColor: "transparent",
 		borderLeftColor: "transparent",
 		borderTopColor: "transparent",
 		borderBottomColor: "gray",
-	},
-	container: {
-		marginTop: 10,
 	},
 });
