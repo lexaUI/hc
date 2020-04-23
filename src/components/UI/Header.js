@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import { THEME } from "../../theme";
+import { THEME } from "../../../constants/theme";
 import { LightText } from "../UI/LightText";
 
 export const Header = ({ children, style }) => {

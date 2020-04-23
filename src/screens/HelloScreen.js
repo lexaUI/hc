@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import { THEME } from "../theme";
+import { THEME } from "../../constants/theme";
 import { Entypo, AntDesign } from "@expo/vector-icons";
 import { LoginButton } from "../components/UI/LoginButton";
 import { Header } from "../components/UI/Header";

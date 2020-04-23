@@ -136,10 +136,11 @@ const styles = EStyleSheet.create({
 	},
 	headerTitle: {
 		fontSize: "2.6rem",
+		paddingTop: 20,
 	},
 	headerInfo: {
 		fontSize: "1.2rem",
-		paddingTop: 10,
+		paddingTop: 5,
 	},
 	classes: {
 		justifyContent: "center",

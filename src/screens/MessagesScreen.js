@@ -1,94 +1,65 @@
 import React, { useState } from "react";
-import {
-	Text,
-	View,
-	ScrollView,
-	StyleSheet,
-	Dimensions,
-	TouchableOpacity,
-} from "react-native";
+import { View, ScrollView, Dimensions, TouchableOpacity } from "react-native";
 import { ListItem, SearchBar, Icon } from "react-native-elements";
+import { BoldText } from "../components/UI/BoldText";
 import { Messages } from "../Messages";
+import EStyleSheet from "react-native-extended-stylesheet";
+import { RoundButton } from "../components/UI/RoundButton";
 
 export const MessagesScreen = () => {
 	const [search, setSearch] = useState("");
 
-	updateSearch = (search) => {
-		setSearch({ search });
-	};
-
 	return (
-		<View name="view">
+		<View>
 			<ScrollView
 				name="scroll"
 				marginTop="0%"
 				height="100%"
 				automaticallyAdjustContentInsets={false}
 			>
-				<Text style={styles.convo}>Conversations</Text>
+				<BoldText style={styles.convo}>Conversations</BoldText>
 				<SearchBar
 					name="search"
 					lightTheme
-					round
+					// round //I think round isn't a good choice
 					placeholder="Search friends"
-					onChangeText={this.updateSearch}
+					onChangeText={(value) => setSearch(value)}
 					value={search}
 				/>
-				{Messages.map((user, i) => (
+				{Messages.map((user, index) => (
 					<ListItem
-						height={Dimensions.get("screen").height * 0.13}
-						key={i}
-						paddingLeft={20}
+						key={index}
 						leftAvatar={{ source: user.pic, size: "large" }}
 						title={user.title}
 						titleStyle={styles.title}
 						subtitle={user.message}
 						subtitleStyle={styles.subtitle}
+						style={styles.msgItem}
 						chevron
 					/>
 				))}
 			</ScrollView>
-			<TouchableOpacity style={styles.fab}>
-				<Icon
-					reverse
-					name="create"
+			<View style={styles.fab}>
+				<RoundButton
+					size={60}
+					color="#4043c9"
 					onPress={() => console.log("hello")}
-					color="#ff8282"
-					size={25}
+					name="pencil"
 				/>
-			</TouchableOpacity>
+			</View>
 		</View>
 	);
 };
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
 	convo: {
-		paddingLeft: 35,
-		fontWeight: "bold",
-		fontSize: 32,
-		color: "#ff8282",
-		marginTop: 50,
-		marginBottom: 25,
+		padding: 20,
+		fontSize: "2.6rem",
 	},
 	fab: {
-		height: 50,
-		width: 50,
-		borderRadius: 200,
 		position: "absolute",
 		bottom: 20,
 		right: 20,
-		justifyContent: "center",
-		alignItems: "center",
-		backgroundColor: "#ff8282",
-	},
-	view: {
-		flex: 1,
-		justifyContent: "center",
-		alignItems: "center",
-	},
-	search: {
-		width: 30,
-		marginBottom: 40,
 	},
 	title: {
 		paddingLeft: 10,
@@ -100,7 +71,11 @@ const styles = StyleSheet.create({
 		paddingTop: 3,
 		color: "#A5A5A5",
 	},
-	create: {
-		position: "absolute",
+	msgItem: {
+		borderWidth: 1,
+		borderBottomColor: "#b2bec3",
+		borderLeftColor: "transparent",
+		borderRightColor: "transparent",
+		borderTopColor: "transparent",
 	},
 });

@@ -5,20 +5,41 @@ import {
 	Platform,
 	TouchableNativeFeedback,
 } from "react-native";
-import { Feather } from "@expo/vector-icons";
+import { Foundation } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-export const RoundButton = ({ style, onPress }) => {
+export const RoundButton = ({
+	style,
+	onPress,
+	size,
+	color,
+	name,
+	iconColor,
+}) => {
 	const Wrapper =
 		Platform.OS === "android" ? TouchableNativeFeedback : TouchableOpacity;
 	return (
-		<View style={{ ...styles.button, ...style }}>
+		<View
+			style={{
+				...styles.button,
+				width: size,
+				height: size,
+				backgroundColor: color,
+				...style,
+			}}
+		>
 			<Wrapper
 				background={TouchableNativeFeedback.Ripple("red")}
 				activeOpacity={0.8}
 				onPress={onPress}
 			>
-				<Feather name="plus" style={styles.title} />
+				<Foundation
+					name={name}
+					style={{
+						fontSize: size / 1.8,
+						color: iconColor ? iconColor : "#fff",
+					}}
+				/>
 			</Wrapper>
 		</View>
 	);
@@ -26,16 +47,9 @@ export const RoundButton = ({ style, onPress }) => {
 
 const styles = StyleSheet.create({
 	button: {
-		width: 70,
-		height: 70,
-		backgroundColor: "red",
 		alignItems: "center",
 		justifyContent: "center",
 		borderRadius: 45,
 		elevation: 5,
-	},
-	title: {
-		fontSize: 45,
-		color: "#fff",
 	},
 });

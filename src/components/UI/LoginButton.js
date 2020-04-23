@@ -1,7 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableNativeFeedback } from "react-native";
-import { THEME } from "../../theme";
-import { BoldText } from "./BoldText";
+import { THEME } from "../../../constants/theme";
 
 export const LoginButton = ({
 	children,
